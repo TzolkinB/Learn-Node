@@ -8,7 +8,8 @@ const storeController = require('../controllers/storeController')
 //  res.render('hello');
 //});
 
-router.get('/', storeController.myMiddleware, storeController.homePage);
+router.get('/', storeController.homePage);
+router.get('/add', storeController.addStore);
 
 router.get('/hello/:name/:age', (req, res) => {
   res.send(req.params);
