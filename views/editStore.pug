@@ -4,9 +4,9 @@ extends layout
 include mixins/_storeForm
 
 
-block content
+block content 
 	//- replaces .content block content section of layout.pug with <p>Hello</p>
 	.inner
 		h2= title 
-		// could also be written as h2 #{title}
-		+ storeForm
+		//- could also be written as h2 #{title}
+		+ storeForm(store)
