@@ -6,8 +6,9 @@ Uses:
 * Express
 * MongoDB (Compass)
 * Mongoose
-* mLab
+* mLab (https://mlab.com)
 * ES6
+* Google Maps API (https://developers.google.com/maps/documentation/)
 
 Packages:
 * connect-flash (https://github.com/jaredhanson/connect-flash)

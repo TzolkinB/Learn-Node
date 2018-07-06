@@ -23,6 +23,8 @@ exports.editStore = async (req, res) => {
 };
 
 exports.updateStore = async (req, res) => {
+	// set location data to be a point
+	req.body.location.type = 'Point';
 	const store = await Store.findOneAndUpdate({ _id: req.params.id }, req.body, {new:true, runValidators: true}).exec();
 	req.flash('success', `Successfully updated ${store.name} <a href="/stores/${store.slug}">View Store</a>`);
 	res.redirect(`/store/${store.slug}`);
