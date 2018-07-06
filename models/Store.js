@@ -31,7 +31,8 @@ const storeSchema = new mongoose.Schema({
 			type: String,
 			required: 'You must supply an address'
 		}
-	}
+	},
+	photo: String
 });
 
 storeSchema.pre('save', function(next) { //before saving a store, give it this.name, only run if name changes
