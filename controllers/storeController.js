@@ -1,10 +1,26 @@
 const mongoose = require('mongoose');
 const Store = mongoose.model('Store'); // store schema 
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid/v3');
+
+//don't want to same image file, but save resized version
+const multerOptions = {
+	storage: multer.memoryStorage(), //store in memory
+	fileFilter(req, file, next) {
+		const isPhoto = file.mimetype.startsWith('image/');
+		if(isPhoto) {
+			next(null, true); //callback
+		} else {
+			next({ message: 'That filetype is not accepted.'}, false);
+		}
+	}
+};
 
 exports.myMiddleware = (req, res, next) => {
 	req.name = 'Kim';
 	next();
-}
+};
 
 exports.homePage = (req, res) => {
 	console.log(req.name); //logs 'Kim' in the terminal
@@ -34,6 +50,16 @@ exports.getStores = async (req, res) => {
 	// Query the db for list of all stores
 	const stores = await Store.find();
 	res.render('stores', {title: 'Stores', stores });
+}
+
+exports.upload = multer.(multerOptions).single('photo'); //looking for single photo input
+
+exports.resize = async (req, res, next) {
+	if(!req.file) {
+		next(); //if no new file to resize, skip to next middleware which is createStore
+		return;
+	}
+	console.log(req.file);
 }
 
 exports.createStore = async (req, res) => {
