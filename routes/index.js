@@ -29,6 +29,8 @@ router.post('/add/:id',
 router.get('/store/:slug', catchErrors(storeController.getStoreBySlug));
 router.get('/stores/:id/edit', catchErrors(storeController.editStore));
 
+router.get('/tags', catchErrors(storeController.getStoresByTag));
+router.get('/tags/:tag', catchErrors(storeController.getStoresByTag));
 //router.get('/hello/:name/:age', (req, res) => {
 //  res.send(req.params);
 //});

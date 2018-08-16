@@ -1,7 +1,7 @@
 {
   "name": "dang-thats-delicious",
   "version": "0.0.0",
-  "description": "Learn Node course by Wes Bos"
+  "description": "Learn Node course by Wes Bos",
   "private": true,
   "engines": {
     "node": ">= 7.6.0"
