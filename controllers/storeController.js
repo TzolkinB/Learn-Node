@@ -57,6 +57,15 @@ exports.getStoreBySlug = async (req, res, next) => {
 	const store = await Store.findOne({ slug: req.params.slug });
 	if(!store) return next();
 	res.render('store', {title: store.name, store});
+};
+
+exports.getStoresByTag = async (req, res) => {
+	const tag = req.params.tag;
+	const tagQuery = tag || { $exists: true };
+	const tagsPromise = Store.getTagsList();
+	const storesPromise = Store.find({ tags: tagQuery });
+	const [tags, stores] = await Promise.all([tagsPromise, storesPromise]);
+	res.render('tag', {tags, title: 'Tags', tag, stores });
 }
 
 exports.upload = multer(multerOptions).single('photo'); //looking for single photo input
