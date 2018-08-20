@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const storeController = require('../controllers/storeController');
 const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -37,7 +38,11 @@ router.get('/login', userController.loginForm);
 router.get('/register', userController.registerForm);
 
 // validate registration data, register user, log them in
-router.post('/register', userController.validateRegister);
+router.post('/register',
+	userController.validateRegister,
+	userController.register,
+	authController.login
+);
 
 //router.get('/hello/:name/:age', (req, res) => {
 //  res.send(req.params);

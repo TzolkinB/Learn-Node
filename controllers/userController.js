@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-//const Store = mongoose.model('Store'); // store schema 
+const User = mongoose.model('User'); // user schema from start.js
+const promisify = require('es6-promisify');
 //const multer = require('multer');
 //const jimp = require('jimp');
 //const uuidv4 = require('uuid/v4');
@@ -33,3 +34,10 @@ exports.validateRegister = (req, res, next) => { //validateRegister middleware
 	}
 	next(); // when no errors found
 };
+
+exports.register = async (req, res, next) => {
+	const user = new User({email: req.body.email, name: req.body.name });
+	const register = promisify(User.register, User); //binds register to User obj
+	await register(user, req.body.password);
+	next(); //pass to authController.login
+}
