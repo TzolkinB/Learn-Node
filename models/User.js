@@ -24,5 +24,6 @@ const userSchema = new Schema({
 
 //password are stores as a hash, not actual password 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
+userSchema.plugin(mongodbErrorHandler);
 
 module.exports = mongoose.model('User', userSchema);
